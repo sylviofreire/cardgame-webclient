@@ -1,17 +1,22 @@
-<section id="cardQuestion" type="text/ng-template">    
+<section id="cardQuestion" type="text/ng-template">     
+
         <div class="modal-header">
-            <h3 class="modal-title">Im a modal!</h3>
+            <h3 class="modal-title">{{cardQuestionText}}</h3>
         </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+        <div class="modal-body">            
+              <ul>
+                <li ng-repeat="possibleAnswer in cardPossibleAnswers">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" ng-model="answer.id" ng-value="'foo'">
+                            {{ possibleAnswer.text }}
+                        </input>
+                      </label>                      
+                    </div>                    
                 </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
+              </ul>                        
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <div class="modal-footer">            
+            <button class="btn btn-primary" type="button" ng-click="confirmar(answer)">confirmar</button>        
         </div>    
 </section>

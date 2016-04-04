@@ -64,16 +64,13 @@
                   <div class="row" id="header">
                       <div class="col-md-6">
                           <div id="carta"  class="marrom-escuro">
-                              <p>PERSONAGEM</p>
-                              <p>Life: {{ player1.character.life}}</p>
-                              <p>Attack: {{ player1.character.attack}}</p>
-                              <p>Defense: {{ player1.character.defense}}</p>
+                              <p>PERSONAGEM</p>                              
                           </div>
                       </div>
 
                       <!-- open modal -->
                       <div class="col-md-6">
-                          <div id="carta"  class="marrom-escuro" ng-click="open()">
+                          <div id="carta"  class="marrom-escuro" ng-click="open(player1, player1.cardsInGame[0])">
                               <p>{{ player1.cardsInGame[0].subject.name }}</p>
                           </div>
                       </div>
