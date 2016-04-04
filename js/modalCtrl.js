@@ -1,13 +1,12 @@
+'use strict';
 
 (function() {
 
-    'use strict';
+      angular.module('cgApp').controller('modalCtrl', ModalController);
 
-    angular.module('jhclApp').controller('modalCtrl', AuthController);
+      ModalController.$inject = ['$scope', '$uibModal', 'item'];
 
-      AuthController.$inject = ['$scope', '$uibModalInstance', 'item'];
-
-      function AuthController ($scope, $uibModalInstance, item){
+      function ModalController ($scope, $uibModalInstance, item){
 
         $scope.item = item;
 

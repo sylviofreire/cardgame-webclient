@@ -1,5 +1,4 @@
 <section id="dashboard" data-ng-init="init()">
-
     <div class="row">
       <div class="col-md-10">
 
@@ -11,13 +10,12 @@
                     <div class="col-md-2 mesa">
                         <div id="carta" class="marrom">
                             <p>DECK</p>
-                            <!-- <img src="https://yugiohfungame.files.wordpress.com/2013/11/blue-eyes.png" /> -->
                         </div>
                     </div>
                     <div class="col-md-10 mesa">                       
                         <div class="row">
-                            <div ng-repeat="card in data.opponentPlayer.availableCards">
-                                <div class="grid-carta-mesa" ng-click="move(data.opponentPlayer.username, $index)">
+                            <div ng-repeat="card in player2.availableCards">
+                                <div class="grid-carta-mesa" ng-click="move(player2.username, $index)">
                                     <div id="carta" class="marrom-claro">
                                         <p>{{ card.subject.name }}</p>                                    
                                     </div>
@@ -31,26 +29,23 @@
                     <div class="col-md-6">
                         <div id="carta"  class="marrom-escuro">
                             <p>PERSONAGEM</p>
-                            <!-- <img src="https://yugiohfungame.files.wordpress.com/2013/11/blue-eyes.png" /> -->
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div id="carta"  class="marrom-escuro">
-                            <p>{{ data.opponentPlayer.cardsInGame[0].subject.name }}</p>
-                            <!-- <img src="https://yugiohfungame.files.wordpress.com/2013/11/blue-eyes.png" /> -->
+                            <p>{{ player2.cardsInGame[0].subject.name }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div id="round" class='on'></div>
-                        <p class='round-texto'>Round 1</p>
+                        <div id="round" ng-class="player2.timeToPlay ? 'on' : 'off'"></div>
+                        <p class='round-texto'>{{player2.username}}</p>
                   </div>
                 </div>
 
             </div>
           </div>
-
 
 
                               <!-- divisao -->
@@ -61,8 +56,8 @@
 
                   <div class="row">
                       <div class="col-md-12">
-                          <div id="round" class='off'></div>
-                          <p class='round-texto'>Round 2</p>
+                          <div id="round" ng-class="player1.timeToPlay ? 'on' : 'off'"></div>
+                          <p class='round-texto'>{{player1.username}}</p>
                     </div>
                   </div>
 
@@ -70,15 +65,20 @@
                       <div class="col-md-6">
                           <div id="carta"  class="marrom-escuro">
                               <p>PERSONAGEM</p>
-                              <!-- <img src="https://yugiohfungame.files.wordpress.com/2013/11/blue-eyes.png" /> -->
+                              <p>Life: {{ player1.character.life}}</p>
+                              <p>Attack: {{ player1.character.attack}}</p>
+                              <p>Defense: {{ player1.character.defense}}</p>
                           </div>
                       </div>
+
+                      <!-- open modal -->
                       <div class="col-md-6">
-                          <div id="carta"  class="marrom-escuro">
-                              <p>{{ data.currentPlayer.cardsInGame[0].subject.name }}</p>
-                              <!-- <img src="https://yugiohfungame.files.wordpress.com/2013/11/blue-eyes.png" /> -->
+                          <div id="carta"  class="marrom-escuro" ng-click="open()">
+                              <p>{{ player1.cardsInGame[0].subject.name }}</p>
                           </div>
                       </div>
+
+
                   </div>
 
                   <!-- deck and cartas -->
@@ -86,14 +86,13 @@
                       <div class="col-md-2 mesa">
                           <div id="carta" class="marrom">
                               <p>DECK</p>
-                              <!-- <img src="https://yugiohfungame.files.wordpress.com/2013/11/blue-eyes.png" /> -->
                           </div>
                       </div>
                       <div class="col-md-10 mesa">
 
                           <div class="row">
-                            <div ng-repeat="card in data.currentPlayer.availableCards">
-                                <div class="grid-carta-mesa" ng-click="move(data.currentPlayer.username, $index)">
+                            <div ng-repeat="card in player1.availableCards">
+                                <div class="grid-carta-mesa" ng-click="move(player1.username, $index)">
                                     <div id="carta" class="marrom-claro">
                                         <p>{{ card.subject.name }}</p>                                    
                                     </div>
