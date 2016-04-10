@@ -6,8 +6,8 @@
 
       ModalController.$inject = ['$scope', '$uibModal', 'item'];
 
-      function ModalController ($scope, $uibModalInstance, item){
-
+      function ModalController ($scope, $uibModal, item){
+        $scope.button = "Save data";
         $scope.item = item;
 
         $scope.selected = {
@@ -15,15 +15,13 @@
         };
 
         $scope.ok = function () {
-          $uibModalInstance.close($scope.selected.item);
+          $uibModal.close($scope.selected.item);
         };
 
         $scope.cancel = function () {
-          $uibModalInstance.dismiss('cancel');
+          $uibModal.dismiss('cancel');
         };
 
       }
 
 })();
-
-
