@@ -2,17 +2,20 @@
 
 (function() {
     angular.module('cgApp').controller('dashboardCtrl', DashBoardController);
-    DashBoardController.$inject = ['$scope', '$http', '$uibModal', '$log', '$interval', '$rootScope'];
-
+    DashBoardController.$inject = ['$scope', '$http', '$uibModal', '$log', '$interval', '$rootScope', '$location'];
+    let interval
+    let loop
     function DashBoardController ($scope, $http, $uibModal, $log, $interval, $rootScope) {
       var vm = this
       $http.defaults.useXDomain = true
       $scope.works = []
       $scope.animationsEnabled = true
 
+      interval = $interval
+
       $scope.init = function () {
         reloadData($http, $scope, $rootScope.username);
-        $interval(function() {
+        loop = $interval(function() {
             reloadData($http, $scope, $rootScope.username);
         }, 1000)
 
@@ -75,31 +78,46 @@
       }
     }
 
-})();
 
-function moveRequest($http, $scope, params) {
-  $http.post('http://localhost:8080/cardgame-1.0/api/move', params)
-       .success(function(data, status) {
-         reloadData($http, $scope, params.username)
-  });
-}
 
-function playRequest($http, $scope, params) {
-  $http.post('http://localhost:8080/cardgame-1.0/api/play', params)
-   .success(function(data, status) {
-      $scope.response = data.response;
-      $scope.button = "atacar";
-  });
-}
-
-function reloadData($http, $scope, username) {
-  let params = {
-    username: username
+  function moveRequest($http, $scope, params) {
+    $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/move', params)
+         .success(function(data, status) {
+           reloadData($http, $scope, params.username)
+    });
   }
-  $http.post('http://localhost:8080/cardgame-1.0/api/status', params)
-       .success(function(data){
-         $scope.player1 = data.player1;
-         $scope.player2 = data.player2;
-         $scope.onlinePlayers = data.audience;
-      });
-}
+
+  function playRequest($http, $scope, params) {
+    $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/play', params)
+     .success(function(data, status) {
+        $scope.response = data.response;
+        $scope.button = "atacar";
+    });
+  }
+
+  function leaveGame($http, $scope, params) {
+    $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/leave', params)
+     .success(function(data, status) {
+        console.log('saiu')
+    });
+  }
+
+  function reloadData($http, $scope, username) {
+    let params = {
+      username: username
+    }
+    $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/status', params)
+         .success(function(data) {
+             if(!data.player1 || !data.player2) {
+               interval.cancel(loop)
+               alert('o jogo acabou, vai embora porra!')
+               return
+             }
+             $scope.player1 = data.player1;
+             $scope.player2 = data.player2;
+             $scope.onlinePlayers = data.audience;
+    })
+
+  }
+
+})();

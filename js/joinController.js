@@ -13,7 +13,7 @@
               username: $scope.username
             }
 
-            $http.post('http://localhost:8080/cardgame-1.0/api/join', params)
+            $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/join', params)
                  .success(function(data, status) {
                    $rootScope.username = $scope.username
                    $location.path('/dashboard');
