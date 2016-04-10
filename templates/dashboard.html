@@ -12,15 +12,15 @@
                             <p>DECK</p>
                         </div>
                     </div>
-                    <div class="col-md-10 mesa">                       
+                    <div class="col-md-10 mesa">
                         <div class="row">
                             <div ng-repeat="card in player2.availableCards">
                                 <div class="grid-carta-mesa" ng-click="move(player2.username, $index)">
                                     <div id="carta" class="marrom-claro">
-                                        <p>{{ card.subject.name }}</p>                                    
+                                        <p>{{ card.subject.name }}</p>
                                     </div>
                                 </div>
-                              </div>  
+                              </div>
                           </div>
                     </div>
                 </div>
@@ -29,6 +29,9 @@
                     <div class="col-md-6">
                         <div id="carta"  class="marrom-escuro">
                             <p>PERSONAGEM</p>
+                            <p>Ataque: {{ player2.character.attack }}</p>
+                            <p>Defesa: {{ player2.character.defense }}</p>
+                            <p>Vida: {{ player2.character.life }}</p>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -64,14 +67,22 @@
                   <div class="row" id="header">
                       <div class="col-md-6">
                           <div id="carta"  class="marrom-escuro">
-                              <p>PERSONAGEM</p>                              
+                              <p>PERSONAGEM</p>
+                              <p>Ataque: {{ player1.character.attack }}</p>
+                              <p>Defesa: {{ player1.character.defense }}</p>
+                              <p>Vida: {{ player1.character.life }}</p>
                           </div>
                       </div>
 
                       <!-- open modal -->
                       <div class="col-md-6">
                           <div id="carta"  class="marrom-escuro" ng-click="open(player1, player1.cardsInGame[0])">
+                            <div ng-if="player1.cardsInGame[0].subject.name">
                               <p>{{ player1.cardsInGame[0].subject.name }}</p>
+                              <p>Ataque: {{ player1.cardsInGame[0].attack }}</p>
+                              <p>Defesa: {{ player1.cardsInGame[0].defense }}</p>
+                              <p>Vida: {{ player1.cardsInGame[0].life }}</p>
+                              </div>
                           </div>
                       </div>
 
@@ -91,10 +102,13 @@
                             <div ng-repeat="card in player1.availableCards">
                                 <div class="grid-carta-mesa" ng-click="move(player1.username, $index)">
                                     <div id="carta" class="marrom-claro">
-                                        <p>{{ card.subject.name }}</p>                                    
+                                        <p>{{ card.subject.name }}</p>
+                                        <p>Ataque: {{ card.attack }}</p>
+                                        <p>Defesa: {{ card.defense }}</p>
+                                        <p>Vida: {{ card.life }}</p>
                                     </div>
                                 </div>
-                              </div>  
+                              </div>
                           </div>
 
                       </div>
@@ -111,8 +125,8 @@
           </div>
           <ul>
              <li class="animate-repeat" ng-repeat="onlinePlayer in onlinePlayers">
-                {{onlinePlayer.username}}                
-              </li>              
+                {{onlinePlayer.username}}
+              </li>
           </ul>
       </div>
     </div>
