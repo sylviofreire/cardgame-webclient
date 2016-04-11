@@ -108,11 +108,11 @@
     }
     $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/status', params)
          .success(function(data) {
-             if(!data.player1 || !data.player2) {
-               interval.cancel(loop)
-               alert('o jogo acabou, vai embora porra!')
-               return
-             }
+            //  if(!data.player1 || !data.player2) {
+            //    interval.cancel(loop)
+            //    alert('o jogo acabou, vai embora porra!')
+            //    return
+            //  }
              $scope.player1 = data.player1;
              $scope.player2 = data.player2;
              $scope.onlinePlayers = data.audience;
