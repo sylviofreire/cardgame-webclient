@@ -90,7 +90,7 @@
   function playRequest($http, $scope, params) {
     $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/play', params)
      .success(function(data, status) {
-        $scope.response = data.response;
+        $scope.response = data.msg;
         $scope.button = "atacar";
     });
   }
@@ -107,15 +107,10 @@
       username: username
     }
     $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/status', params)
-         .success(function(data) {
-            //  if(!data.player1 || !data.player2) {
-            //    interval.cancel(loop)
-            //    alert('o jogo acabou, vai embora porra!')
-            //    return
-            //  }
-             $scope.player1 = data.player1;
-             $scope.player2 = data.player2;
-             $scope.onlinePlayers = data.audience;
+         .success(function(data, status) {
+             $scope.player1 = data.msg.player1;
+             $scope.player2 = data.msg.player2;
+             $scope.onlinePlayers = data.msg.audience;
     })
 
   }

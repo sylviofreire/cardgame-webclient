@@ -15,9 +15,14 @@
 
             $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/join', params)
                  .success(function(data, status) {
+                  // console.log(data)
+                  // console.log(status)
                    $rootScope.username = $scope.username
                    $location.path('/dashboard');
-            });
+            })
+                 .catch(function(err) {
+                  console.log(err)
+                 })
         };
     }
 
