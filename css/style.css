@@ -68,9 +68,17 @@ ul li{
     width: 100%;
 }
 #carta p{
-    padding-top: 18px;
-    text-align: center;
-    color: #fff;
+    padding: 1%;
+    margin: 0 0 0px;
+    color: #000000;
+    font-size: small;
+    font-family: monospace;
+}
+
+.card-labels{
+    padding-top: 118px;
+    margin-top: 0%;
+    padding-left: 36px;
 }
 .grid-carta-mesa{
     width: 20%;
@@ -88,6 +96,22 @@ ul li{
 }
 .marrom-claro{
     background-color: #b5835a;
+}
+
+.geography{
+    background-image: url('../img/cardGeography.png')
+}
+.history{
+    background-image: url('../img/cardHistory.png')
+}
+.math{
+    background-image: url('../img/cardMath.png')
+}
+.portuguese{
+    background-image: url('../img/cardPortuguese.png')
+}
+.science{
+    background-image: url('../img/cardScience.png')
 }
 
 #round{

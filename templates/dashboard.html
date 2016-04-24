@@ -17,7 +17,7 @@
                             <div ng-repeat="card in player2.availableCards">
                                 <div class="grid-carta-mesa" ng-click="move(player2.username, $index)">
                                     <div id="carta" class="marrom-claro">
-                                        <p>{{ card.subject.name }}</p>
+
                                     </div>
                                 </div>
                               </div>
@@ -35,8 +35,14 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div id="carta"  class="marrom-escuro">
-                            <p>{{ player2.cardsInGame[0].subject.name }}</p>
+                        <div id="carta"  class="marrom-escuro" ng-class="{geography: player2.cardsInGame[0].subject.name == 'Geography' , history: player2.cardsInGame[0].subject.name == 'History', math: player2.cardsInGame[0].subject.name == 'Math', portuguese: player2.cardsInGame[0].subject.name == 'Portuguese', science: player2.cardsInGame[0].subject.name == 'Science'}">
+                          <div ng-if="player2.cardsInGame[0].subject.name">
+                            <div class="card-labels">
+                              <p>{{ player2.cardsInGame[0].attack }} Ataque </p>
+                              <p>{{ player2.cardsInGame[0].defense }} Defesa </p>
+                              <p>{{ player2.cardsInGame[0].life }} Vida </p>
+                            </div>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -76,13 +82,14 @@
 
                       <!-- open modal -->
                       <div class="col-md-6">
-                          <div id="carta"  class="marrom-escuro" ng-click="open(player1, player1.cardsInGame[0])">
+                          <div id="carta"  class="marrom-escuro" ng-click="open(player1, player1.cardsInGame[0])" ng-class="{geography: player1.cardsInGame[0].subject.name == 'Geography' , history: player1.cardsInGame[0].subject.name == 'History', math: player1.cardsInGame[0].subject.name == 'Math', portuguese: player1.cardsInGame[0].subject.name == 'Portuguese', science: player1.cardsInGame[0].subject.name == 'Science'}">
                             <div ng-if="player1.cardsInGame[0].subject.name">
-                              <p>{{ player1.cardsInGame[0].subject.name }}</p>
-                              <p>Ataque: {{ player1.cardsInGame[0].attack }}</p>
-                              <p>Defesa: {{ player1.cardsInGame[0].defense }}</p>
-                              <p>Vida: {{ player1.cardsInGame[0].life }}</p>
+                              <div class="card-labels">
+                                <p>{{ player1.cardsInGame[0].attack }} Ataque </p>
+                                <p>{{ player1.cardsInGame[0].defense }} Defesa </p>
+                                <p>{{ player1.cardsInGame[0].life }} Vida </p>
                               </div>
+                            </div>
                           </div>
                       </div>
 
@@ -101,11 +108,14 @@
                           <div class="row">
                             <div ng-repeat="card in player1.availableCards">
                                 <div class="grid-carta-mesa" ng-click="move(player1.username, $index)">
-                                    <div id="carta" class="marrom-claro">
-                                        <p>{{ card.subject.name }}</p>
-                                        <p>Ataque: {{ card.attack }}</p>
-                                        <p>Defesa: {{ card.defense }}</p>
-                                        <p>Vida: {{ card.life }}</p>
+                                    <div id="carta" class="marrom-claro " ng-class="{geography: card.subject.name == 'Geography' , history: card.subject.name == 'History', math: card.subject.name == 'Math', portuguese: card.subject.name == 'Portuguese', science: card.subject.name == 'Science'}">
+                                        <!-- <img src="img/cardGeography.png" /> -->
+                                        <!-- <p>{{ card.subject.name }}</p> -->
+                                        <div class="card-labels">
+                                          <p>{{ card.attack }} Ataque </p>
+                                          <p>{{ card.defense }} Defesa </p>
+                                          <p>{{ card.life }} Vida </p>
+                                        </div>
                                     </div>
                                 </div>
                               </div>
