@@ -2,17 +2,25 @@
 
 (function() {
     angular.module('cgApp').controller('dashboardCtrl', DashBoardController);
-    DashBoardController.$inject = ['$scope', '$http', '$uibModal', '$log', '$interval', '$rootScope', '$location'];
+    DashBoardController.$inject = ['$scope', '$http', '$uibModal', '$log', '$interval', '$rootScope', '$location', '$localStorage', 'dataService'];
     let interval
     let loop
-    function DashBoardController ($scope, $http, $uibModal, $log, $interval, $rootScope) {
+    var token
+    function DashBoardController ($scope, $http, $uibModal, $log, $interval, $rootScope, $location, $localStorage, dataService) {
+      token = dataService.getData();
+      if(token == '' || typeof token == 'undefined' ){
+        $location.path('/join');
+        return;
+      }
+
+      $localStorage.token = token
       var vm = this
       $http.defaults.useXDomain = true
       $scope.works = []
       $scope.animationsEnabled = true
 
       interval = $interval
-
+      $http.defaults.headers.post.Authorization = "Bearer " + token;
       $scope.init = function () {
         reloadData($http, $scope, $rootScope.username);
         loop = $interval(function() {
@@ -107,10 +115,11 @@
       username: username
     }
     $http.post('http://cardgame-gcaraciolo.rhcloud.com/api/status', params)
-         .success(function(data, status) {
-             $scope.player1 = data.msg.player1;
-             $scope.player2 = data.msg.player2;
-             $scope.onlinePlayers = data.msg.audience;
+      .success(function(data, status) {
+         console.log(data);
+         $scope.player1 = data.msg.player1;
+         $scope.player2 = data.msg.player2;
+         $scope.onlinePlayers = data.msg.audience;
     })
 
   }
