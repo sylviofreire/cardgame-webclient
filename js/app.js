@@ -22,8 +22,8 @@
 
       $stateProvider.state("logout", {
         url: "/logout",
-        templateUrl: "templates/join.html",
-        controller: "joinController"
+        templateUrl: "",
+        controller: "logoutController"
       });
 
     });
